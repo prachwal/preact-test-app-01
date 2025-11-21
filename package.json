@@ -1,0 +1,74 @@
+{
+  "name": "preact-test-app-01",
+  "version": "1.0.0",
+  "description": "A modern TypeScript-based frontend application built with Preact, Vite, and comprehensive development tools",
+  "type": "module",
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/preact-test-app-01.git"
+  },
+  "keywords": [
+    "preact",
+    "typescript",
+    "vite",
+    "frontend",
+    "react-alternative",
+    "modern-web"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "type-check": "tsc --noEmit",
+    "docs:generate": "typedoc",
+    "docs:build": "npm run docs:generate && npm run docs:serve",
+    "docs:serve": "npx http-server docs -p 4000",
+    "docs:clean": "rimraf docs",
+    "test": "NO_COLOR=1 vitest --reporter=verbose",
+    "test:ui": "NO_COLOR=1 vitest --ui",
+    "test:run": "NO_COLOR=1 vitest run --reporter=verbose",
+    "test:coverage": "NO_COLOR=1 vitest run --coverage --reporter=verbose",
+    "test:watch": "NO_COLOR=1 vitest --watch --reporter=verbose",
+    "test:related": "NO_COLOR=1 vitest --related --reporter=verbose",
+    "test:junit": "vitest run --reporter=junit",
+    "test:junit:ci": "vitest run --reporter=junit --outputFile=test-results/junit.xml"
+  },
+  "dependencies": {
+    "preact": "^10.27.2"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/preact": "^3.2.4",
+    "@types/node": "^24.10.1",
+    "@types/testing-library__jest-dom": "^5.14.9",
+    "@typescript-eslint/eslint-plugin": "^8.47.0",
+    "@typescript-eslint/parser": "^8.47.0",
+    "@vitest/coverage-v8": "^4.0.13",
+    "@vitest/ui": "^4.0.13",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "jsdom": "^27.2.0",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.1.2",
+    "typedoc": "^0.28.14",
+    "typedoc-plugin-markdown": "^4.9.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4",
+    "vitest": "^4.0.13"
+  }
+}

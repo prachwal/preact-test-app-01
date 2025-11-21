@@ -1,0 +1,16 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPointStrategy": "expand",
+  "entryPoints": ["src"],
+  "out": "docs",
+  "plugin": ["typedoc-plugin-markdown"],
+  "readme": "README.md",
+  "hideBreadcrumbs": true,
+  "categorizeByGroup": true,
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "sort": ["alphabetical", "source-order"],
+  "name": "Preact Test App API Documentation"
+}
