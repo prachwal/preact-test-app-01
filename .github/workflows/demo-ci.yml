@@ -37,6 +37,7 @@ jobs:
         env:
           VITE_BASE_URL: ${{ env.VITE_BASE_URL }}
           VITE_APP_VERSION: ${{ github.sha }}
+          NODE_ENV: production
 
       - name: Check for symlinks and hard links in build output
         run: |
@@ -98,6 +99,7 @@ jobs:
         env:
           VITE_BASE_URL: ${{ env.VITE_BASE_URL }}
           VITE_APP_VERSION: ${{ github.sha }}
+          NODE_ENV: production
 
       - name: Check for symlinks and hard links in build output
         run: |
