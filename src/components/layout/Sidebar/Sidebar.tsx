@@ -11,19 +11,15 @@
 
 import { memo } from 'preact/compat';
 import { useEffect, useState } from 'preact/hooks';
-import { useLocation, Link } from 'preact-iso';
+import { useLocation } from 'preact-iso';
 import { sidebarOpen, closeSidebar } from '@/signals/navigationSignals';
 import { navigationItems } from '@/routes/navigation';
+import { BASE_URL } from '@/constants/app';
 
 /**
  * Mobile breakpoint for responsive behavior
  */
 const MOBILE_BREAKPOINT = 1024;
-
-/**
- * Check if we're in a test environment
- */
-const isTestEnvironment = typeof process !== 'undefined' && process.env.NODE_ENV === 'test';
 
 /**
  * Sidebar component
@@ -32,9 +28,6 @@ export const Sidebar = memo(() => {
   const { url } = useLocation();
   const isOpen = sidebarOpen.value;
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < MOBILE_BREAKPOINT);
-
-  // Use Link component in production, <a> tag in tests
-  const LinkComponent = isTestEnvironment ? 'a' : Link;
 
   // Handle window resize with debounce
   useEffect(() => {
@@ -83,22 +76,23 @@ export const Sidebar = memo(() => {
         <nav className="sidebar__nav">
           <ul className="sidebar__list">
             {navigationItems.map(item => {
-              const isActive = url === item.path;
+              const fullPath = BASE_URL === '/' ? item.path : `${BASE_URL.replace(/\/$/, '')}${item.path}`;
+              const isActive = url === fullPath || (BASE_URL !== '/' && url === item.path);
               const linkClasses = ['sidebar__link', isActive && 'sidebar__link--active']
                 .filter(Boolean)
                 .join(' ');
 
               return (
                 <li key={item.path} className="sidebar__item"> {/* item.path is unique */}
-                  <LinkComponent
-                    href={item.path}
+                  <a
+                    href={fullPath}
                     className={linkClasses}
                     onClick={handleLinkClick}
                     aria-current={isActive ? 'page' : undefined}
                   >
-                    {item.icon && <span className="sidebar__icon">{item.icon}</span>}
+                    {(item.icon != null) && <span className="sidebar__icon">{item.icon}</span>}
                     <span className="sidebar__label">{item.label}</span>
-                  </LinkComponent>
+                  </a>
                 </li>
               );
             })}

@@ -8,11 +8,13 @@
  * @module app
  */
 
-import { Router, Route, Link } from 'preact-iso';
+import { Router, Route, LocationProvider, useLocation } from 'preact-iso';
 import { lazy } from 'preact-iso';
 import { Suspense } from 'preact/compat';
 import { DashboardLayout } from './components/layout/DashboardLayout';
 import { ErrorBoundary } from './components/ui';
+import { BASE_URL } from './constants/app';
+import { useEffect } from 'preact/hooks';
 
 // Check if we're in a test environment
 const isTestEnvironment = typeof process !== 'undefined' && process.env.NODE_ENV === 'test';
@@ -54,20 +56,32 @@ const ExternalLinksRoute = () => <RouteWithErrorBoundary component={ExternalLink
 /**
  * NotFound component for 404 pages
  */
-const NotFound = () => {
-  // Use Link component in production, <a> tag in tests
-  const LinkComponent = isTestEnvironment ? 'a' : Link;
+const NotFound = () => (
+  <ErrorBoundary>
+    <div className="not-found">
+      <h1>404 - Page Not Found</h1>
+      <p>The page you're looking for doesn't exist.</p>
+      <a href={BASE_URL}>Go to Dashboard</a>
+    </div>
+  </ErrorBoundary>
+);
 
-  return (
-    <ErrorBoundary>
-      <div className="not-found">
-        <h1>404 - Page Not Found</h1>
-        <p>The page you're looking for doesn't exist.</p>
-        <LinkComponent href="/">Go to Dashboard</LinkComponent>
-      </div>
-    </ErrorBoundary>
-  );
-};
+/**
+ * LocationDebug component to log location changes
+ */
+function LocationDebug() {
+  const location = useLocation();
+  
+  useEffect(() => {
+    console.log('[LocationDebug] Location changed:', {
+      url: location.url,
+      path: location.path,
+      query: location.query
+    });
+  }, [location.url, location.path]);
+  
+  return null;
+}
 
 /**
  * Main App component with routing
@@ -75,20 +89,28 @@ const NotFound = () => {
  * @returns Root application component
  */
 export function App() {
-  // Get base URL from Vite environment or default to '/'
-  const baseUrl = (import.meta.env?.VITE_BASE_URL as string) || '/';
-
+  console.log('[App] Rendering with BASE_URL:', BASE_URL);
+  console.log('[App] Current location:', window.location.href);
+  console.log('[App] Current pathname:', window.location.pathname);
+  
   return (
-    <DashboardLayout>
-      <Suspense fallback={<div className="loading">Loading...</div>}>
-        <Router base={baseUrl}>
-          <Route path="/" component={DashboardRoute} />
-          <Route path="/counter" component={CounterRoute} />
-          <Route path="/docs" component={DocumentationRoute} />
-          <Route path="/links" component={ExternalLinksRoute} />
-          <Route default component={NotFound} />
-        </Router>
-      </Suspense>
-    </DashboardLayout>
+    <LocationProvider>
+      <LocationDebug />
+      <DashboardLayout>
+        <Suspense fallback={<div className="loading">Loading...</div>}>
+          <Router
+            onRouteChange={(url) => console.log('[Router] Route changed to:', url)}
+            onLoadStart={(url) => console.log('[Router] Loading started for:', url)}
+            onLoadEnd={(url) => console.log('[Router] Loading ended for:', url)}
+          >
+            <Route path={BASE_URL === '/' ? '/' : BASE_URL.replace(/\/$/, '')} component={DashboardRoute} />
+            <Route path={BASE_URL === '/' ? '/counter' : `${BASE_URL.replace(/\/$/, '')}/counter`} component={CounterRoute} />
+            <Route path={BASE_URL === '/' ? '/docs' : `${BASE_URL.replace(/\/$/, '')}/docs`} component={DocumentationRoute} />
+            <Route path={BASE_URL === '/' ? '/links' : `${BASE_URL.replace(/\/$/, '')}/links`} component={ExternalLinksRoute} />
+            <Route default component={NotFound} />
+          </Router>
+        </Suspense>
+      </DashboardLayout>
+    </LocationProvider>
   );
 }
