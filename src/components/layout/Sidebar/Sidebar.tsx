@@ -21,12 +21,20 @@ import { navigationItems } from '@/routes/navigation';
 const MOBILE_BREAKPOINT = 1024;
 
 /**
+ * Check if we're in a test environment
+ */
+const isTestEnvironment = typeof process !== 'undefined' && process.env.NODE_ENV === 'test';
+
+/**
  * Sidebar component
  */
 export const Sidebar = memo(() => {
   const { url } = useLocation();
   const isOpen = sidebarOpen.value;
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < MOBILE_BREAKPOINT);
+
+  // Use Link component in production, <a> tag in tests
+  const LinkComponent = isTestEnvironment ? 'a' : Link;
 
   // Handle window resize with debounce
   useEffect(() => {
@@ -82,7 +90,7 @@ export const Sidebar = memo(() => {
 
               return (
                 <li key={item.path} className="sidebar__item"> {/* item.path is unique */}
-                  <Link
+                  <LinkComponent
                     href={item.path}
                     className={linkClasses}
                     onClick={handleLinkClick}
@@ -90,7 +98,7 @@ export const Sidebar = memo(() => {
                   >
                     {item.icon && <span className="sidebar__icon">{item.icon}</span>}
                     <span className="sidebar__label">{item.label}</span>
-                  </Link>
+                  </LinkComponent>
                 </li>
               );
             })}

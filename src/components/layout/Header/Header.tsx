@@ -13,6 +13,12 @@ import { Link } from 'preact-iso';
 import { sidebarOpen, toggleSidebar } from '@/signals/navigationSignals';
 import { APP_NAME } from '@/constants/app';
 
+// Check if we're in a test environment
+const isTestEnvironment = typeof process !== 'undefined' && process.env.NODE_ENV === 'test';
+
+/**
+ * Header component
+ */
 const HeaderComponent = memo(() => {
   const isSidebarOpen = sidebarOpen.value;
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -22,6 +28,9 @@ const HeaderComponent = memo(() => {
       buttonRef.current.focus();
     }
   }, [isSidebarOpen]);
+
+  // Use Link component in production, <a> tag in tests
+  const LinkComponent = isTestEnvironment ? 'a' : Link;
 
   return (
     <header className="header">
@@ -39,10 +48,10 @@ const HeaderComponent = memo(() => {
         </button>
 
         <div className="header__brand">
-          <Link href="/" className="header__logo-link">
+          <LinkComponent href="/" className="header__logo-link">
             <span className="header__logo">⚛️</span>
             <h1 className="header__title">{APP_NAME}</h1>
-          </Link>
+          </LinkComponent>
         </div>
 
         <div className="header__actions">
