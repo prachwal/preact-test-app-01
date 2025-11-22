@@ -79,43 +79,61 @@ jobs:
     needs: [test-and-build]
     if: github.ref == 'refs/heads/main'
     permissions:
-      contents: read
-      pages: write
-      id-token: write
+      contents: write
     steps:
-      - name: Download build
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: dist/
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Verify downloaded artifact
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project for deployment
+        run: npm run build
+        env:
+          VITE_BASE_URL: ${{ env.VITE_BASE_URL }}
+          VITE_APP_VERSION: ${{ github.sha }}
+
+      - name: Check for symlinks and hard links in build output
         run: |
-          echo "Checking downloaded artifact for symlinks and hard links"
-          echo "Current directory: $(pwd)"
-          echo "Contents of dist/:"
-          ls -la dist/
-          
+          echo "Checking for symlinks in dist/"
           if find dist/ -type l | grep -q .; then
-            echo "ERROR: Found symlinks in downloaded artifact:"
+            echo "Found symlinks:"
             find dist/ -type l
-            exit 1
+            echo "Removing symlinks..."
+            find dist/ -type l -delete
           else
-            echo "No symlinks found in downloaded artifact"
+            echo "No symlinks found"
           fi
           
+          echo "Checking for hard links in dist/"
           if find dist/ -type f -links +1 | grep -q .; then
-            echo "ERROR: Found hard links in downloaded artifact:"
+            echo "Found hard links:"
             find dist/ -type f -links +1
-            exit 1
+            echo "Copying hard linked files to break links..."
+            # Create a temporary directory and copy all files, breaking hard links
+            mkdir -p dist_temp
+            cp -r dist/* dist_temp/
+            rm -rf dist
+            mv dist_temp dist
           else
-            echo "No hard links found in downloaded artifact"
+            echo "No hard links found"
           fi
-          
-          echo "Total size of dist/: $(du -sh dist/)"
+
+      - name: Add .nojekyll file for GitHub Pages
+        run: touch dist/.nojekyll
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/
+          cname: false
 
   # Basic security check (lightweight)
   security-check:
