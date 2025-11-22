@@ -41,17 +41,29 @@
     "test:watch": "NO_COLOR=1 vitest --watch --reporter=verbose",
     "test:related": "NO_COLOR=1 vitest --related --reporter=verbose",
     "test:junit": "vitest run --reporter=junit",
-    "test:junit:ci": "vitest run --reporter=junit --outputFile=test-results/junit.xml"
+    "test:junit:ci": "vitest run --reporter=junit --outputFile=test-results/junit.xml",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "storybook:build": "storybook build --output-dir ./storybook-static",
+    "storybook:serve": "http-server storybook-static -p 6006"
   },
   "dependencies": {
     "preact": "^10.27.2"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.2",
+    "@storybook/addon-a11y": "^10.0.8",
+    "@storybook/addon-docs": "^10.0.8",
+    "@storybook/addon-links": "^10.0.8",
+    "@storybook/preact": "^10.0.8",
+    "@storybook/react": "^10.0.8",
+    "@storybook/react-vite": "^10.0.8",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/preact": "^3.2.4",
     "@types/node": "^24.10.1",
-    "@types/testing-library__jest-dom": "^5.14.9",
+    "@types/react": "19.2.6",
+    "@types/react-dom": "19.2.3",
+    "@types/testing-library__jest-dom": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^8.47.0",
     "@typescript-eslint/parser": "^8.47.0",
     "@vitest/coverage-v8": "^4.0.13",
