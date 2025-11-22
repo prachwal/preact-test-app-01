@@ -8,17 +8,23 @@
   /* Theme Colors */
   --pta-color-background: #242424;
   --pta-color-surface: #1a1a1a;
-  --pta-color-surface-light: #f9f9f9;
   --pta-color-surface-dark: #1a1a1a;
   
   /* Text Colors */
   --pta-color-text: rgba(255, 255, 255, 0.87);
   --pta-color-text-secondary: #888;
-  --pta-color-text-inverse: #213547;
   
   /* Border Colors */
   --pta-color-border: transparent;
   --pta-color-border-focus: #646cff;
+  
+  /* Button Colors - Dark Theme */
+  --pta-color-button-bg: #646cff;
+  --pta-color-button-bg-hover: #535bf2;
+  --pta-color-button-text: #ffffff;
+  --pta-color-button-border: transparent;
+  --pta-color-button-border-hover: #535bf2;
+  --pta-color-button-focus-ring: #646cff;
   
   /* Additional Colors */
   --pta-color-focus-ring: -webkit-focus-ring-color;
@@ -38,6 +44,14 @@
     --pta-color-text-secondary: #888;
     --pta-color-primary-hover: #747bff;
     --pta-color-logo-shadow: #747bffaa;
+    
+    /* Light Theme Button Colors */
+    --pta-color-button-bg: #f0f0f0;
+    --pta-color-button-bg-hover: #e0e0e0;
+    --pta-color-button-text: #213547;
+    --pta-color-button-border: #d0d0d0;
+    --pta-color-button-border-hover: #646cff;
+    --pta-color-button-focus-ring: #646cff;
   }
 }
 
@@ -76,52 +90,46 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
   line-height: 1.1;
   color: var(--pta-color-text);
 }
 
 button {
   border-radius: 8px;
-  border: 1px solid var(--pta-color-border);
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  border: 1px solid var(--pta-color-button-border);
+  padding: clamp(0.5em, 1.5vw, 0.6em) clamp(1em, 2vw, 1.2em);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--pta-color-surface);
+  background-color: var(--pta-color-button-bg);
+  color: var(--pta-color-button-text);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.25s;
 }
 
 button:hover {
-  border-color: var(--pta-color-border-focus);
+  border-color: var(--pta-color-button-border-hover);
+  background-color: var(--pta-color-button-bg-hover);
 }
 
 button:focus,
 button:focus-visible {
-  outline: 4px auto var(--pta-color-focus-ring);
+  outline: 4px auto var(--pta-color-button-focus-ring);
 }
 
-@media (prefers-color-scheme: light) {
-  h1 {
-    color: var(--pta-color-text-inverse);
-  }
-  
-  button {
-    background-color: var(--pta-color-surface-light);
-  }
-}
+
 
 #app {
-  max-width: 1280px;
+  max-width: clamp(320px, 90vw, 1280px);
   margin: 0 auto;
-  padding: 2rem;
+  padding: clamp(1rem, 4vw, 2rem);
   text-align: center;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: clamp(4em, 8vw, 6em);
+  padding: clamp(1em, 2vw, 1.5em);
 }
 
 .logo:hover {
@@ -133,7 +141,7 @@ button:focus-visible {
 }
 
 .card {
-  padding: 2em;
+  padding: clamp(1em, 3vw, 2em);
 }
 
 .read-the-docs {

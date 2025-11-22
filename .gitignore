@@ -13,6 +13,7 @@ dist-ssr
 docs
 coverage
 test-results
+storybook-static
 *.local
 
 # Editor directories and files

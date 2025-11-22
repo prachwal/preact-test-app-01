@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [preact()],
   resolve: {
     alias: {
-      // Preact 10 has built-in React compatibility, no aliases needed
+      '@': '/src',
     },
   },
   esbuild: {
