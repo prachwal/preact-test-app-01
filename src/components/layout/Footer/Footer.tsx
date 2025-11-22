@@ -8,13 +8,9 @@
  */
 
 import { memo } from 'preact/compat';
-import { memo } from 'preact/compat';
 import { APP_NAME, APP_VERSION } from '@/constants/app';
 
-/**
- * Footer component
- */
-export const Footer = memo(() => {
+const FooterComponent = memo(() => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -37,4 +33,6 @@ export const Footer = memo(() => {
   );
 });
 
-Footer.displayName = 'Footer';
+(FooterComponent as any).displayName = 'Footer';
+
+export { FooterComponent as Footer };

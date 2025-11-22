@@ -11,7 +11,7 @@ import { memo } from 'preact/compat';
  * <ExternalLinks />
  * ```
  */
-export const ExternalLinks = memo(() => (
+const ExternalLinksComponent = memo(() => (
   <section>
     <h1>External Links</h1>
     <p className="external-links">
@@ -28,4 +28,6 @@ export const ExternalLinks = memo(() => (
   </section>
 ));
 
-ExternalLinks.displayName = 'ExternalLinks';
+(ExternalLinksComponent as any).displayName = 'ExternalLinks';
+
+export { ExternalLinksComponent as ExternalLinks };

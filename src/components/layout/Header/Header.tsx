@@ -12,10 +12,7 @@ import { useRef, useEffect } from 'preact/hooks';
 import { sidebarOpen, toggleSidebar } from '@/signals/navigationSignals';
 import { APP_NAME } from '@/constants/app';
 
-/**
- * Header component
- */
-export const Header = memo(() => {
+const HeaderComponent = memo(() => {
   const isSidebarOpen = sidebarOpen.value;
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -55,4 +52,6 @@ export const Header = memo(() => {
   );
 });
 
-Header.displayName = 'Header';
+(HeaderComponent as any).displayName = 'Header';
+
+export { HeaderComponent as Header };

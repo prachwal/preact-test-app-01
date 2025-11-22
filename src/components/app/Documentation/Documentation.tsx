@@ -10,7 +10,7 @@ import { memo } from 'preact/compat';
  * <Documentation />
  * ```
  */
-export const Documentation = memo(() => (
+const DocumentationComponent = memo(() => (
   <section>
     <h1>Documentation</h1>
     <p className="read-the-docs">
@@ -19,4 +19,6 @@ export const Documentation = memo(() => (
   </section>
 ));
 
-Documentation.displayName = 'Documentation';
+(DocumentationComponent as any).displayName = 'Documentation';
+
+export { DocumentationComponent as Documentation };

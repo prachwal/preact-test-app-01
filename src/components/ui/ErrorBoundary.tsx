@@ -16,9 +16,9 @@
  */
 
 import { Component } from 'preact/compat';
-import type { ComponentChildren, ErrorInfo } from 'preact/compat';
+import type { ComponentChildren } from 'preact';
+import type { ErrorInfo } from 'preact/compat';
 import { ERROR_MESSAGES } from '@/constants/app';
-import { memo } from 'preact/compat';
 import { Button } from './Button';
 
 export interface ErrorBoundaryProps {
@@ -79,8 +79,3 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     return this.props.children;
   }
 }
-
-/**
- * Memoized Error Boundary for performance
- */
-export const MemoizedErrorBoundary = memo(ErrorBoundary);

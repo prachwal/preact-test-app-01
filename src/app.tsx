@@ -11,7 +11,6 @@
 import { Router, Route } from 'preact-iso';
 import { lazy } from 'preact-iso';
 import { Suspense } from 'preact/compat';
-import type { ComponentType } from 'preact';
 import { DashboardLayout } from './components/layout/DashboardLayout';
 import { ErrorBoundary } from './components/ui';
 
@@ -24,7 +23,7 @@ const ExternalLinks = lazy(() => import('./components/app/ExternalLinks').then(m
 /**
  * Route wrapper with ErrorBoundary
  */
-const RouteWithErrorBoundary = ({ component: Component }: { component: ComponentType }) => (
+const RouteWithErrorBoundary = ({ component: Component }: { component: any }) => (
   <ErrorBoundary>
     <Component />
   </ErrorBoundary>

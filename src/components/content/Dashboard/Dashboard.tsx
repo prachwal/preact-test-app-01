@@ -7,8 +7,6 @@
  * @module components/content/Dashboard
  */
 
-import { memo } from 'preact/compat';
-
 /**
  * Dashboard component
  */
