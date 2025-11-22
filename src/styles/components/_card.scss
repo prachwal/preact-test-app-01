@@ -1,0 +1,44 @@
+@use '../abstracts' as *;
+
+// Card component styles
+
+.card {
+  background: var(--pta-color-surface);
+  border-radius: $border-radius-lg;
+  padding: clamp(1.5em, 4vw, 2.5em);
+  box-shadow: $shadow-md;
+  @include hover-lift(-2px);
+
+  &:hover {
+    box-shadow: $shadow-xl;
+  }
+}
+
+.read-the-docs {
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+  line-height: $line-height-base;
+  opacity: 0.8;
+  transition: opacity $transition-fast;
+  color: var(--pta-color-text-secondary);
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.external-links {
+  line-height: $line-height-relaxed;
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+
+  a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: all $transition-fast;
+
+    &:hover {
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+  }
+}

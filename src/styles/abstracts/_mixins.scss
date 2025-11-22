@@ -1,0 +1,57 @@
+@use 'variables' as *;
+
+// Modern SCSS mixins
+
+// Responsive breakpoints
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'xs' {
+    @media (max-width: $breakpoint-xs) {
+      @content;
+    }
+  } @else if $breakpoint == 'sm' {
+    @media (max-width: $breakpoint-sm) {
+      @content;
+    }
+  } @else if $breakpoint == 'md' {
+    @media (max-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $breakpoint == 'lg' {
+    @media (max-width: $breakpoint-lg) {
+      @content;
+    }
+  }
+}
+
+// Focus visible styles
+@mixin focus-visible($color: var(--pta-color-border-focus), $offset: 2px, $width: 3px) {
+  &:focus,
+  &:focus-visible {
+    outline: $width solid $color;
+    outline-offset: $offset;
+  }
+}
+
+// Hover lift effect
+@mixin hover-lift($distance: -1px) {
+  transition:
+    transform $transition-base,
+    box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY($distance);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Gradient overlay
+@mixin gradient-overlay(
+  $direction: 'to bottom',
+  $start-color: var(--pta-color-surface),
+  $end-color: transparent
+) {
+  background: linear-gradient(#{$direction}, #{$start-color} 0%, #{$end-color} 100%);
+}

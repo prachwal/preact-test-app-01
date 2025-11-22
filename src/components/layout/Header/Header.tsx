@@ -1,36 +1,58 @@
-import viteLogo from '/vite.svg';
-import preactLogo from '/preact.svg';
+/**
+ * Header Component - Top Navigation Bar
+ *
+ * @remarks
+ * Responsive header with logo, navigation, and hamburger menu for mobile
+ *
+ * @module components/layout/Header
+ */
+
+import { memo } from 'preact/compat';
+import { useRef, useEffect } from 'preact/hooks';
+import { sidebarOpen, toggleSidebar } from '@/signals/navigationSignals';
+import { APP_NAME } from '@/constants/app';
 
 /**
- * Header component with logos
- * 
- * Renders the application header containing Vite and Preact logos with links.
- * 
- * @remarks
- * This component demonstrates proper Preact usage with JSX pragma and Fragment.
- * 
- * @example
- * ```tsx
- * <Header />
- * ```
+ * Header component
  */
-export function Header() {
+export const Header = memo(() => {
+  const isSidebarOpen = sidebarOpen.value;
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isSidebarOpen && buttonRef.current) {
+      buttonRef.current.focus();
+    }
+  }, [isSidebarOpen]);
+
   return (
-    <header>
-      <a 
-        href="https://vite.dev" 
-        target="_blank" 
-        rel="noopener noreferrer"
-      >
-        <img src={viteLogo} class="logo" alt="Vite logo" />
-      </a>
-      <a 
-        href="https://preactjs.com" 
-        target="_blank" 
-        rel="noopener noreferrer"
-      >
-        <img src={preactLogo} class="logo preact" alt="Preact logo" />
-      </a>
+    <header className="header">
+      <div className="header__container">
+        <button
+          ref={buttonRef}
+          className="header__hamburger"
+          onClick={toggleSidebar}
+          aria-label="Toggle navigation menu"
+          aria-expanded={isSidebarOpen}
+        >
+          <span className="header__hamburger-line"></span>
+          <span className="header__hamburger-line"></span>
+          <span className="header__hamburger-line"></span>
+        </button>
+
+        <div className="header__brand">
+          <a href="/" className="header__logo-link">
+            <span className="header__logo">⚛️</span>
+            <h1 className="header__title">{APP_NAME}</h1>
+          </a>
+        </div>
+
+        <div className="header__actions">
+          {/* Placeholder for future actions (theme toggle, user menu, etc.) */}
+        </div>
+      </div>
     </header>
   );
-}
+});
+
+Header.displayName = 'Header';

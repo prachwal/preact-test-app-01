@@ -62,7 +62,8 @@ export const WithLearningFocus: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Documentation component emphasizing the learning and exploration aspects of the project.',
+        story:
+          'Documentation component emphasizing the learning and exploration aspects of the project.',
       },
     },
   },
@@ -73,7 +74,8 @@ export const Accessibility: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Documentation component with verified accessibility features and proper semantic structure.',
+        story:
+          'Documentation component with verified accessibility features and proper semantic structure.',
       },
     },
   },

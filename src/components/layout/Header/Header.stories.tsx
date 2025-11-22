@@ -66,7 +66,8 @@ export const Accessibility: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Header with verified accessibility features including semantic HTML and proper link attributes.',
+        story:
+          'Header with verified accessibility features including semantic HTML and proper link attributes.',
       },
     },
   },

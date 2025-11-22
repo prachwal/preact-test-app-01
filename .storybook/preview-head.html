@@ -1,0 +1,45 @@
+<!-- Storybook Preview Head - CSS for full-width display -->
+<style>
+  /* Remove all width constraints from Storybook docs */
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Full width for docs container */
+  .sbdocs-wrapper {
+    max-width: none !important;
+    width: 100% !important;
+    padding: 1rem 2rem !important;
+  }
+
+  .sbdocs-content {
+    max-width: none !important;
+    width: 100% !important;
+  }
+
+  /* Full width for story previews */
+  .docs-story {
+    max-width: none !important;
+    width: 100% !important;
+  }
+
+  /* Optimize story preview container */
+  .docs-story > div {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /* Full width for Canvas */
+  #storybook-root,
+  #storybook-docs {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /* Remove constrained width from preview */
+  .sb-show-main {
+    width: 100% !important;
+    max-width: none !important;
+  }
+</style>

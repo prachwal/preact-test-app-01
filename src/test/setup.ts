@@ -21,6 +21,18 @@ beforeAll(() => {
       dispatchEvent: vi.fn(),
     })),
   });
+
+  // Mock localStorage
+  const localStorageMock = {
+    getItem: vi.fn(),
+    setItem: vi.fn(),
+    removeItem: vi.fn(),
+    clear: vi.fn(),
+  };
+  Object.defineProperty(window, 'localStorage', {
+    writable: true,
+    value: localStorageMock,
+  });
 });
 
 // Clean up after each test
@@ -30,6 +42,5 @@ afterEach(() => {
 
 // Global type declarations for testing library matchers
 declare module 'vitest' {
-  interface JestAssertion<T = any>
-    extends matchers.TestingLibraryMatchers<T, void> {}
+  interface JestAssertion<T = any> extends matchers.TestingLibraryMatchers<T, void> {}
 }

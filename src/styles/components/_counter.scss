@@ -1,0 +1,12 @@
+@use '../abstracts' as *;
+
+// Counter component styles
+
+.counter {
+  &__hint {
+    margin-top: $spacing-sm;
+    color: var(--pta-color-text-secondary);
+    font-size: clamp(0.85rem, 1.5vw, 0.9rem);
+    line-height: $line-height-base;
+  }
+}

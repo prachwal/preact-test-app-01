@@ -1,0 +1,63 @@
+// Typography variables
+$font-family-base:
+  system-ui,
+  -apple-system,
+  'Segoe UI',
+  Roboto,
+  Avenir,
+  Helvetica,
+  Arial,
+  sans-serif !default;
+$font-family-mono: 'Courier New', Courier, monospace !default;
+
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+
+$line-height-base: 1.6 !default;
+$line-height-tight: 1.1 !default;
+$line-height-relaxed: 1.8 !default;
+
+// Spacing
+$spacing-xs: 0.5rem !default;
+$spacing-sm: 1rem !default;
+$spacing-md: 1.5rem !default;
+$spacing-lg: 2rem !default;
+$spacing-xl: 3rem !default;
+$spacing-xxl: 4rem !default;
+
+// Border radius
+$border-radius-sm: 3px !default;
+$border-radius-md: 8px !default;
+$border-radius-lg: 12px !default;
+
+// Transitions
+$transition-fast: 0.2s ease !default;
+$transition-base: 0.25s ease !default;
+$transition-slow: 0.3s ease !default;
+
+// Shadows
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1) !default;
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1) !default;
+$shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.15) !default;
+$shadow-xl: 0 8px 12px rgba(0, 0, 0, 0.15) !default;
+
+// Breakpoints
+$breakpoint-xs: 480px !default;
+$breakpoint-sm: 768px !default;
+$breakpoint-md: 1024px !default;
+$breakpoint-lg: 1200px !default;
+
+// Z-index layers
+$z-index-base: 1 !default;
+$z-index-dropdown: 10 !default;
+$z-index-sticky: 20 !default;
+$z-index-fixed: 30 !default;
+$z-index-modal: 40 !default;
+$z-index-skip-link: 100 !default;
+
+// Layout
+$max-width-content: 680px !default;
+$max-width-container: 1200px !default;
+$min-width-mobile: 320px !default;

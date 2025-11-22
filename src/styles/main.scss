@@ -1,0 +1,17 @@
+// styles/main.scss
+// Main entry point - imports in specific order
+
+// 1. Configuration and helpers (no CSS output)
+@use 'abstracts';
+
+// 2. Base styles and resets
+@use 'base';
+
+// 3. Layout components
+@use 'layout';
+
+// 4. UI Components
+@use 'ui';
+
+// 5. Content Components
+@use 'components';

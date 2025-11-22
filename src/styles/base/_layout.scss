@@ -1,0 +1,33 @@
+@use '../abstracts' as *;
+
+// Base layout styles
+
+body {
+  margin: 0;
+  min-width: $min-width-mobile;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#app {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--pta-color-primary);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 0 0 4px 0;
+  z-index: $z-index-skip-link;
+
+  &:focus {
+    top: 0;
+  }
+}

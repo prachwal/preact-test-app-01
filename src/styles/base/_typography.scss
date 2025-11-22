@@ -1,0 +1,59 @@
+@use '../abstracts' as *;
+
+// Typography base styles
+
+:root {
+  font-family: $font-family-base;
+  line-height: $line-height-base;
+  font-weight: $font-weight-normal;
+  color: var(--pta-color-text);
+  background-color: var(--pta-color-background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  line-height: $line-height-tight;
+  color: var(--pta-color-text);
+  margin: 0;
+}
+
+a {
+  font-weight: $font-weight-medium;
+  color: var(--pta-color-primary);
+  text-decoration: inherit;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: var(--pta-color-primary-hover);
+  }
+
+  @include focus-visible(var(--pta-color-primary), 3px);
+
+  &:focus-visible {
+    border-radius: $border-radius-sm;
+  }
+}
+
+code {
+  font-family: $font-family-mono;
+  background-color: rgba(100, 108, 255, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: $border-radius-sm;
+  font-size: 0.9em;
+}
+
+::selection {
+  background-color: var(--pta-color-primary);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--pta-color-primary);
+  color: white;
+}

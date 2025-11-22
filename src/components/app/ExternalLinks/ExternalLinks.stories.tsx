@@ -51,7 +51,8 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Default external links component showing official Preact + Vite starter documentation link.',
+        story:
+          'Default external links component showing official Preact + Vite starter documentation link.',
       },
     },
   },
@@ -62,7 +63,8 @@ export const WithSecurityFocus: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'External links component emphasizing security features including noopener and noreferrer attributes.',
+        story:
+          'External links component emphasizing security features including noopener and noreferrer attributes.',
       },
     },
   },
@@ -73,7 +75,8 @@ export const Accessibility: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'External links component with verified accessibility features for screen readers and keyboard navigation.',
+        story:
+          'External links component with verified accessibility features for screen readers and keyboard navigation.',
       },
     },
   },

@@ -1,0 +1,107 @@
+// Sidebar Styles - Simplified
+
+@use '../abstracts' as *;
+
+.sidebar {
+  grid-area: sidebar;
+  background: var(--pta-color-surface);
+  border-right: 1px solid var(--pta-color-border);
+  transition: transform 0.2s ease;
+  overflow-y: auto;
+
+  &__nav {
+    padding: 1.5rem 0;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    margin: 0;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    color: var(--pta-color-text);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-left-color: var(--pta-color-primary);
+    }
+
+    &--active {
+      background: rgba(100, 108, 255, 0.1);
+      border-left-color: var(--pta-color-primary);
+      color: var(--pta-color-primary);
+      font-weight: 600;
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--pta-color-border-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  &__icon {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  &__label {
+    font-size: 1rem;
+  }
+
+  // Desktop: Always visible
+  @media (min-width: 1024px) {
+    position: static;
+    transform: none;
+  }
+
+  // Mobile: Overlay
+  @media (max-width: $breakpoint-md - 1px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    z-index: 50;
+    transform: translateX(-100%);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+    &--open {
+      transform: translateX(0);
+    }
+  }
+}
+
+// Sidebar overlay for mobile
+.sidebar-overlay {
+  display: none;
+
+  @media (max-width: $breakpoint-md - 1px) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 49;
+    animation: fade-in 0.2s ease;
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+}

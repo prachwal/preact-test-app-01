@@ -1,0 +1,83 @@
+@use '../abstracts' as *;
+
+// Modern CSS reset and base styles
+
+:root {
+  // Generate CSS custom properties from color maps
+  @include generate-color-vars($colors-primary);
+  @include generate-color-vars($colors-dark);
+
+  // System colors
+  color-scheme: light dark;
+}
+
+// Light theme
+@media (prefers-color-scheme: light) {
+  :root {
+    @include generate-color-vars($colors-light);
+  }
+}
+
+// Reduce motion for accessibility
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Loading and error states
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  color: var(--pta-color-text-secondary);
+}
+
+.error-boundary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  background: var(--pta-color-surface);
+  border: 1px solid var(--pta-color-border);
+  border-radius: $border-radius-md;
+
+  h1 {
+    color: var(--pta-color-text);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: var(--pta-color-text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    background: var(--pta-color-button-bg);
+    color: var(--pta-color-button-text);
+    border: 1px solid var(--pta-color-button-border);
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background: var(--pta-color-button-bg-hover);
+      border-color: var(--pta-color-button-border-hover);
+    }
+  }
+
+  details {
+    margin-top: 1rem;
+    text-align: left;
+    max-width: 100%;
+  }
+}

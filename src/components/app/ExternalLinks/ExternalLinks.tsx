@@ -1,24 +1,20 @@
-
+import { memo } from 'preact/compat';
 
 /**
  * External links component
- * 
- * Renders external resource links for Preact documentation and setup guide.
- * 
- * @remarks
- * This component provides navigation to external resources with proper
- * security attributes for external links.
- * 
+ *
+ * Displays link to Preact + Vite starter guide.
+ * Optimized with memo for performance.
+ *
  * @example
  * ```tsx
  * <ExternalLinks />
  * ```
- * 
- * @returns JSX element containing external links
  */
-export function ExternalLinks() {
-  return (
-    <p>
+export const ExternalLinks = memo(() => (
+  <section>
+    <h1>External Links</h1>
+    <p className="external-links">
       Check out{' '}
       <a
         href="https://preactjs.com/guide/v10/getting-started#create-a-vite-powered-preact-app"
@@ -29,5 +25,7 @@ export function ExternalLinks() {
       </a>
       , the official Preact + Vite starter
     </p>
-  );
-}
+  </section>
+));
+
+ExternalLinks.displayName = 'ExternalLinks';

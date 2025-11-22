@@ -1,0 +1,85 @@
+// Color definitions using modern SCSS maps
+// Supports light and dark theme generation
+
+// Primary colors
+$colors-primary: (
+  'primary': #646cff,
+  'primary-hover': #535bf2,
+  'secondary': #673ab8,
+) !default;
+
+// Dark theme colors
+$colors-dark: (
+  'background': #242424,
+  'surface': #1a1a1a,
+  'surface-dark': #1a1a1a,
+  'text': rgba(255, 255, 255, 0.87),
+  'text-secondary': #888,
+  'border': transparent,
+  'border-focus': #646cff,
+  'button-bg': #646cff,
+  'button-bg-hover': #535bf2,
+  'button-text': #ffffff,
+  'button-border': transparent,
+  'button-border-hover': #535bf2,
+  'button-focus-ring': #646cff,
+  'focus-ring': -webkit-focus-ring-color,
+  'logo-shadow': #646cffaa,
+  'logo-shadow-secondary': #673ab8aa,
+) !default;
+
+// Light theme colors
+$colors-light: (
+  'background': #ffffff,
+  'surface': #f5f5f7,
+  'surface-dark': #1a1a1a,
+  'text': #213547,
+  'text-secondary': #666,
+  'border': transparent,
+  'border-focus': #646cff,
+  'button-bg': #646cff,
+  'button-bg-hover': #535bf2,
+  'button-text': #ffffff,
+  'button-border': transparent,
+  'button-border-hover': #535bf2,
+  'button-focus-ring': #646cff,
+  'focus-ring': -webkit-focus-ring-color,
+  'logo-shadow': #747bffaa,
+  'logo-shadow-secondary': #673ab8aa,
+) !default;
+
+// Generate CSS custom properties from color map
+//
+// @param $map - SCSS map of color names to values
+// @param $prefix - Prefix for CSS custom property names (default: 'pta-color')
+//
+// @example
+//   $colors: ('primary': #646cff, 'secondary': #673ab8);
+//   @include generate-color-vars($colors);
+//   // Outputs: --pta-color-primary: #646cff; --pta-color-secondary: #673ab8;
+@mixin generate-color-vars($map, $prefix: 'pta-color') {
+  @each $name, $value in $map {
+    --#{$prefix}-#{$name}: #{$value};
+  }
+}
+
+// Export colors for use in other modules
+//
+// @param $theme - Theme name ('dark', 'light', 'primary')
+// @param $name - Color name within the theme
+//
+// @return Color value or null if not found
+//
+// @example
+//   .button { background: get-color('primary', 'primary'); }
+@function get-color($theme, $name) {
+  @if $theme == 'dark' {
+    @return map-get($colors-dark, $name);
+  } @else if $theme == 'light' {
+    @return map-get($colors-light, $name);
+  } @else if $theme == 'primary' {
+    @return map-get($colors-primary, $name);
+  }
+  @warn "Unknown theme '#{$theme}' or color '#{$name}'";
+  @return null;
+}

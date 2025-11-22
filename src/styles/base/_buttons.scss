@@ -1,0 +1,31 @@
+@use '../abstracts' as *;
+
+// Button base styles
+
+button {
+  border-radius: $border-radius-md;
+  border: 1px solid var(--pta-color-button-border);
+  padding: clamp(0.6em, 1.5vw, 0.75em) clamp(1.2em, 2.5vw, 1.5em);
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  font-weight: $font-weight-semibold;
+  font-family: inherit;
+  background-color: var(--pta-color-button-bg);
+  color: var(--pta-color-button-text);
+  cursor: pointer;
+  transition: all $transition-base;
+  box-shadow: $shadow-sm;
+
+  &:hover {
+    border-color: var(--pta-color-button-border-hover);
+    background-color: var(--pta-color-button-bg-hover);
+    transform: translateY(-1px);
+    box-shadow: $shadow-lg;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  @include focus-visible(var(--pta-color-button-focus-ring));
+}
