@@ -10,8 +10,9 @@ const packageJson = JSON.parse(
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  // Determine base URL based on environment
-  const baseUrl = mode === 'production' ? '/preact-test-app-01/' : '/';
+  // Determine base URL based on environment variable or mode
+  // VITE_BASE_URL can be set in CI/CD or environment
+  const baseUrl = process.env.VITE_BASE_URL || (mode === 'production' ? '/preact-test-app-01/' : '/');
   
   console.log(`Building in ${mode} mode with base URL: ${baseUrl}`);  
 

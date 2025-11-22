@@ -93,8 +93,11 @@ export function App() {
   console.log('[App] Current location:', window.location.href);
   console.log('[App] Current pathname:', window.location.pathname);
   
+  // Normalize BASE_URL by removing trailing slash for scope
+  const normalizedBaseUrl = BASE_URL === '/' ? undefined : BASE_URL.replace(/\/$/, '');
+  
   return (
-    <LocationProvider>
+    <LocationProvider scope={normalizedBaseUrl}>
       <LocationDebug />
       <DashboardLayout>
         <Suspense fallback={<div className="loading">Loading...</div>}>
@@ -103,10 +106,10 @@ export function App() {
             onLoadStart={(url) => console.log('[Router] Loading started for:', url)}
             onLoadEnd={(url) => console.log('[Router] Loading ended for:', url)}
           >
-            <Route path={BASE_URL === '/' ? '/' : BASE_URL.replace(/\/$/, '')} component={DashboardRoute} />
-            <Route path={BASE_URL === '/' ? '/counter' : `${BASE_URL.replace(/\/$/, '')}/counter`} component={CounterRoute} />
-            <Route path={BASE_URL === '/' ? '/docs' : `${BASE_URL.replace(/\/$/, '')}/docs`} component={DocumentationRoute} />
-            <Route path={BASE_URL === '/' ? '/links' : `${BASE_URL.replace(/\/$/, '')}/links`} component={ExternalLinksRoute} />
+            <Route path="/" component={DashboardRoute} />
+            <Route path="/counter" component={CounterRoute} />
+            <Route path="/docs" component={DocumentationRoute} />
+            <Route path="/links" component={ExternalLinksRoute} />
             <Route default component={NotFound} />
           </Router>
         </Suspense>

@@ -76,8 +76,10 @@ export const Sidebar = memo(() => {
         <nav className="sidebar__nav">
           <ul className="sidebar__list">
             {navigationItems.map(item => {
+              // Build full path with BASE_URL for href attribute
               const fullPath = BASE_URL === '/' ? item.path : `${BASE_URL.replace(/\/$/, '')}${item.path}`;
-              const isActive = url === fullPath || (BASE_URL !== '/' && url === item.path);
+              // Check if current route matches (url from useLocation is already scoped)
+              const isActive = url === item.path;
               const linkClasses = ['sidebar__link', isActive && 'sidebar__link--active']
                 .filter(Boolean)
                 .join(' ');
