@@ -1,0 +1,1 @@
+import{M as e,u as o}from"./index-BhZBPOK1.js";import"./vendor-BXh5-_sV.js";const t=e(()=>o("section",{children:[o("h1",{children:"Documentation"}),o("p",{className:"read-the-docs",children:"Click on the Vite and Preact logos to learn more"})]}));t.displayName="Documentation";export{t as Documentation};
