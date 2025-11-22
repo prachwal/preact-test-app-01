@@ -11,7 +11,7 @@
 
 import { memo } from 'preact/compat';
 import { useEffect, useState } from 'preact/hooks';
-import { useLocation } from 'preact-iso';
+import { useLocation, Link } from 'preact-iso';
 import { sidebarOpen, closeSidebar } from '@/signals/navigationSignals';
 import { navigationItems } from '@/routes/navigation';
 
@@ -82,7 +82,7 @@ export const Sidebar = memo(() => {
 
               return (
                 <li key={item.path} className="sidebar__item"> {/* item.path is unique */}
-                  <a
+                  <Link
                     href={item.path}
                     className={linkClasses}
                     onClick={handleLinkClick}
@@ -90,7 +90,7 @@ export const Sidebar = memo(() => {
                   >
                     {item.icon && <span className="sidebar__icon">{item.icon}</span>}
                     <span className="sidebar__label">{item.label}</span>
-                  </a>
+                  </Link>
                 </li>
               );
             })}

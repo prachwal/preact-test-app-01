@@ -8,7 +8,7 @@
  * @module app
  */
 
-import { Router, Route } from 'preact-iso';
+import { Router, Route, Link } from 'preact-iso';
 import { lazy } from 'preact-iso';
 import { Suspense } from 'preact/compat';
 import { DashboardLayout } from './components/layout/DashboardLayout';
@@ -45,7 +45,7 @@ const NotFound = () => (
     <div className="not-found">
       <h1>404 - Page Not Found</h1>
       <p>The page you're looking for doesn't exist.</p>
-      <a href="/">Go to Dashboard</a>
+      <Link href="/">Go to Dashboard</Link>
     </div>
   </ErrorBoundary>
 );
@@ -56,10 +56,13 @@ const NotFound = () => (
  * @returns Root application component
  */
 export function App() {
+  // Get base URL from Vite environment or default to '/'
+  const baseUrl = (import.meta.env?.VITE_BASE_URL as string) || '/';
+
   return (
     <DashboardLayout>
       <Suspense fallback={<div className="loading">Loading...</div>}>
-        <Router>
+        <Router base={baseUrl}>
           <Route path="/" component={DashboardRoute} />
           <Route path="/counter" component={CounterRoute} />
           <Route path="/docs" component={DocumentationRoute} />

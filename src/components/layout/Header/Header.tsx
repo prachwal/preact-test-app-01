@@ -9,6 +9,7 @@
 
 import { memo } from 'preact/compat';
 import { useRef, useEffect } from 'preact/hooks';
+import { Link } from 'preact-iso';
 import { sidebarOpen, toggleSidebar } from '@/signals/navigationSignals';
 import { APP_NAME } from '@/constants/app';
 
@@ -38,10 +39,10 @@ const HeaderComponent = memo(() => {
         </button>
 
         <div className="header__brand">
-          <a href="/" className="header__logo-link">
+          <Link href="/" className="header__logo-link">
             <span className="header__logo">⚛️</span>
             <h1 className="header__title">{APP_NAME}</h1>
-          </a>
+          </Link>
         </div>
 
         <div className="header__actions">
