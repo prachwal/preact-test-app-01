@@ -8,8 +8,6 @@ on:
 
 env:
   NODE_VERSION: '20'
-  # Base URL for GitHub Pages deployment
-  VITE_BASE_URL: '/preact-test-app-01/'
 
 jobs:
   # Simple test and build pipeline
@@ -35,7 +33,6 @@ jobs:
       - name: Build project
         run: npm run build
         env:
-          VITE_BASE_URL: ${{ env.VITE_BASE_URL }}
           VITE_APP_VERSION: ${{ github.sha }}
           NODE_ENV: production
 

@@ -94,7 +94,7 @@ export function App() {
   console.log('[App] Current pathname:', window.location.pathname);
   
   // Normalize BASE_URL by removing trailing slash for scope
-  const normalizedBaseUrl = BASE_URL === '/' ? undefined : BASE_URL.replace(/\/$/, '');
+  const normalizedBaseUrl = BASE_URL === '/' ? undefined : BASE_URL;
   
   return (
     <LocationProvider scope={normalizedBaseUrl}>

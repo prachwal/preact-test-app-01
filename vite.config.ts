@@ -10,9 +10,11 @@ const packageJson = JSON.parse(
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  // Determine base URL based on environment variable or mode
+  // Determine base URL based on environment variable, GitHub repository, or mode
   // VITE_BASE_URL can be set in CI/CD or environment
-  const baseUrl = process.env.VITE_BASE_URL || (mode === 'production' ? '/preact-test-app-01/' : '/');
+  const baseUrl = process.env.VITE_BASE_URL || 
+    (process.env.GITHUB_REPOSITORY ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/` : 
+     (mode === 'production' ? '/preact-test-app-01/' : '/'));
   
   console.log(`Building in ${mode} mode with base URL: ${baseUrl}`);  
 
